@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RPNCalculatorXam"
+             x:Class="RPNCalculatorXam.MainPage"
+             BackgroundColor="#555555">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 35, 0, 0" />
+            <On Platform="Android" Value="0, 15, 0, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="functionButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#00bcb6" />
+                <Setter Property="TextColor" Value="#ffffff" />
+                <Setter Property="FontSize" Value="11" />
+            </Style>
+
+            <Style x:Key="auxiliaryButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#777777" />
+                <Setter Property="TextColor" Value="#ffffff" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            
+            <Style x:Key="digitButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#00a2d8" />
+                <Setter Property="TextColor" Value="#ffffff" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+
+            <!--<Style x:Key="inputLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="36" />
+                <Setter Property="BackgroundColor" Value="#3f88ff" />
+                <Setter Property="TextColor" Value="#ffffff" />
+            </Style>-->
+
+            <Style x:Name="rowStyle" TargetType="RowDefinition">
+                <Setter Property="Height" Value="1*" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid Padding="5" ColumnSpacing="3" RowSpacing="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.75*" />
+                <RowDefinition Height="0.2*" /> <!--separator-->
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="0.1*" /> <!--separator-->
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Entry x:Name="inputEntry" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" HorizontalTextAlignment="End" Placeholder="0."
+                   TextColor="White" IsEnabled="True" TextChanged="InputEntry_TextChanged" />
+            <!--<Label x:Name="inputLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Style="{StaticResource inputLabelStyle}" Text="0." />-->
+            
+            <!--Controls-->
+            <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource functionButtonStyle}" Text="sin" Clicked="FuncButton_Click" />
+            <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource functionButtonStyle}" Text="cos" Clicked="FuncButton_Click" />
+            <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource functionButtonStyle}" Text="tan" Clicked="FuncButton_Click" />
+            <Button Grid.Row="2" Grid.Column="3" Style="{StaticResource functionButtonStyle}" Text="asin" Clicked="FuncButton_Click" />
+            <Button Grid.Row="2" Grid.Column="4" Style="{StaticResource functionButtonStyle}" Text="acos" FontSize="9" Clicked="FuncButton_Click" />
+            <Button Grid.Row="2" Grid.Column="5" Style="{StaticResource functionButtonStyle}" Text="atan" FontSize="9" Clicked="FuncButton_Click" />
+
+            <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource functionButtonStyle}" Text="log" Clicked="FuncButton_Click" />
+            <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource functionButtonStyle}" Text="ln" Clicked="FuncButton_Click" />
+            <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource functionButtonStyle}" Text="sqrt" FontSize="9" Clicked="FuncButton_Click" />
+            <Button Grid.Row="3" Grid.Column="3" Style="{StaticResource functionButtonStyle}" Text="floor" FontSize="7.5" Clicked="FuncButton_Click" />
+            <Button Grid.Row="3" Grid.Column="4" Style="{StaticResource functionButtonStyle}" Text="ceil" Clicked="FuncButton_Click" />
+            <Button Grid.Row="3" Grid.Column="5" Style="{StaticResource functionButtonStyle}" Text="^" FontSize="14" Clicked="OperatorButton_Click" />
+
+
+            <Button Grid.Row="5" Grid.Column="0" Style="{StaticResource auxiliaryButtonStyle}" Text="(" Clicked="LeftParButton_Click" />
+            <Button Grid.Row="5" Grid.Column="1" Style="{StaticResource auxiliaryButtonStyle}" Text=")" Clicked="RightParButton_Click" />
+            <Button Grid.Row="5" Grid.Column="2" Style="{StaticResource auxiliaryButtonStyle}" Text="C" Clicked="ClearButton_Click" />
+            <Button Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource auxiliaryButtonStyle}" Text="Backspace" Clicked="BackspaceButton_Click" />
+            <Button Grid.Row="5" Grid.Column="5" Style="{StaticResource auxiliaryButtonStyle}" Text="=" Clicked="EqualsButton_Click" />
+
+            <Button Grid.Row="6" Grid.Column="0" Style="{StaticResource auxiliaryButtonStyle}" Text="pi" Clicked="PiButton_Click" />
+            <Button Grid.Row="6" Grid.Column="1" Style="{StaticResource auxiliaryButtonStyle}" Text="e" Clicked="EButton_Click" />
+            <Button Grid.Row="6" Grid.Column="2" Style="{StaticResource digitButtonStyle}" Text="7" Clicked="DigitButton_Click" />
+            <Button Grid.Row="6" Grid.Column="3" Style="{StaticResource digitButtonStyle}" Text="8" Clicked="DigitButton_Click" />
+            <Button Grid.Row="6" Grid.Column="4" Style="{StaticResource digitButtonStyle}" Text="9" Clicked="DigitButton_Click" />
+            <Button Grid.Row="6" Grid.Column="5" Style="{StaticResource auxiliaryButtonStyle}" Text="+" Clicked="OperatorButton_Click" />
+
+            <Button Grid.Row="7" Grid.Column="0" Style="{StaticResource auxiliaryButtonStyle}" Text="MR" Clicked="MemRecallButton_Click" />
+            <Button Grid.Row="7" Grid.Column="1" Style="{StaticResource auxiliaryButtonStyle}" Text="MS" Clicked="MemStoreButton_Click" />
+            <Button Grid.Row="7" Grid.Column="2" Style="{StaticResource digitButtonStyle}" Text="4" Clicked="DigitButton_Click" />
+            <Button Grid.Row="7" Grid.Column="3" Style="{StaticResource digitButtonStyle}" Text="5" Clicked="DigitButton_Click" />
+            <Button Grid.Row="7" Grid.Column="4" Style="{StaticResource digitButtonStyle}" Text="6" Clicked="DigitButton_Click" />
+            <Button Grid.Row="7" Grid.Column="5" Style="{StaticResource auxiliaryButtonStyle}" Text="-" Clicked="OperatorButton_Click" />
+
+            <Button Grid.Row="8" Grid.Column="0" Style="{StaticResource auxiliaryButtonStyle}" Text="M+" Clicked="MemPlusButton_Click" />
+            <Button Grid.Row="8" Grid.Column="1" Style="{StaticResource auxiliaryButtonStyle}" Text="M-" Clicked="MemMinusButton_Click" />
+            <Button Grid.Row="8" Grid.Column="2" Style="{StaticResource digitButtonStyle}" Text="1" Clicked="DigitButton_Click" />
+            <Button Grid.Row="8" Grid.Column="3" Style="{StaticResource digitButtonStyle}" Text="2" Clicked="DigitButton_Click" />
+            <Button Grid.Row="8" Grid.Column="4" Style="{StaticResource digitButtonStyle}" Text="3" Clicked="DigitButton_Click" />
+            <Button Grid.Row="8" Grid.Column="5" Style="{StaticResource auxiliaryButtonStyle}" Text="*" Clicked="OperatorButton_Click" />
+
+            <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource auxiliaryButtonStyle}" Text="MC" Clicked="MemClearButton_Click" />
+            <Button Grid.Row="9" Grid.Column="2" Style="{StaticResource digitButtonStyle}" Text="0" Clicked="ZeroButton_Click" />
+            <Button Grid.Row="9" Grid.Column="3" Style="{StaticResource digitButtonStyle}" Text="." Clicked="DecimalButton_Click" />
+            <Button Grid.Row="9" Grid.Column="4" Style="{StaticResource digitButtonStyle}" Text="+/-" Clicked="PlusMinusButton_Click" />
+            <Button Grid.Row="9" Grid.Column="5" Style="{StaticResource auxiliaryButtonStyle}" Text="/" Clicked="OperatorButton_Click" />
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
